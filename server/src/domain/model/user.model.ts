@@ -11,3 +11,12 @@ export interface CreateUserInputModel {
   password: string;
   email: string;
 }
+
+export interface AuthenticateUserInputModel {
+  username: string;
+  password: string;
+}
+
+export interface AuthenticateUserModel extends UserModel {
+  token: string
+}

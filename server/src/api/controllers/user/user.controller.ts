@@ -1,14 +1,15 @@
 import { Body, Controller, Get, Post } from "routing-controllers";
-import { CreateUserInput } from "./user.input";
-import { CreateUserUseCase } from "../../../domain/user";
+import { AuthenticateUserInput, CreateUserInput } from "./user.input";
+import { AuthenticateUserUseCase, CreateUserUseCase } from "../../../domain/user";
 import { Service } from "typedi";
-import { UserModel } from "@/domain/model/user.model";
+import { AuthenticateUserModel, UserModel } from "@/domain/model";
 
 @Service()
 @Controller('/user')
 export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
+    private readonly authenticateUseCase: AuthenticateUserUseCase
   ) {}
 
   @Get('/hello')
@@ -17,7 +18,14 @@ export class UserController {
   }
 
   @Post()
-  createUser(@Body() args: CreateUserInput): Promise<UserModel> {
-    return this.createUserUseCase.exec(args);
+  async createUser(@Body() args: CreateUserInput) {
+    const response = await this.createUserUseCase.exec(args);
+    return { data: response };
+  }
+
+  @Post('/authenticate')
+  async authenticate(@Body() args: AuthenticateUserInput) {
+    const response = await this.authenticateUseCase.exec(args);
+    return { data: response }
   }
 }

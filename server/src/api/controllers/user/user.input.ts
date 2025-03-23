@@ -13,3 +13,11 @@ export class CreateUserInput {
   @IsString()
   password: string;
 }
+
+export class AuthenticateUserInput {
+  @IsString()
+  username: string
+
+  @IsString()
+  password: string;
+}
