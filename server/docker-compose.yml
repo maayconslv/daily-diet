@@ -1,0 +1,18 @@
+services:
+  localdb:
+    image: bitnami/postgresql
+    ports:
+      - 2323:5432
+    environment:
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_PASSWORD=admin
+      - POSTGRESQL_DATABASE=localdb
+
+  testdb:
+    image: bitnami/postgresql
+    ports:
+      - 2324:5432
+    environment:
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_PASSWORD=admin
+      - POSTGRESQL_DATABASE=testdb
