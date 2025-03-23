@@ -2,7 +2,7 @@ import { MealDataSource } from "@/data/meal";
 import { UserDataSource } from "@/data/user/user.datasource";
 import { Service } from "typedi";
 import { MealModel, RegisterMealInputModel } from "../model";
-import { MapUserDataDto } from "@/data/util/user.map";
+import { mapUserDataDto } from "@/data/util/user.map";
 import { mapMealDataDto } from "@/data/util/meal.map";
 
 @Service()
@@ -19,7 +19,7 @@ export class RegisterMealUseCase {
     }
 
     const meal = await this.mealDataSource.registerMeal({ ...data, sessionId: user.id });
-    const userMap = MapUserDataDto(user);
+    const userMap = mapUserDataDto(user);
     const mealMap = mapMealDataDto(meal, userMap);
 
     return mealMap;

@@ -2,7 +2,7 @@ import { UserDataSource } from '../../data/user/user.datasource';
 import { Service } from 'typedi'
 import { AuthenticateUserInputModel, AuthenticateUserModel } from '../model';
 import { compare } from 'bcryptjs'
-import { MapUserDataDto } from '../../data/util/user.map';
+import { mapUserDataDto } from '../../data/util/user.map';
 import jwt from 'jsonwebtoken';
 import { Env } from '../../env';
 
@@ -24,7 +24,7 @@ export class AuthenticateUserUseCase {
       throw new Error('Invalid credentials error')
     }
 
-    const userMap = MapUserDataDto(user);
+    const userMap = mapUserDataDto(user);
     const token = jwt.sign({ sub: user.id }, Env.JWT_SECRET);
 
     return { ...userMap, token };
