@@ -1,7 +1,8 @@
-import { UserDataSource } from "@/data/user/user.datasource";
+import { UserDataSource } from "../../data/user/user.datasource";
 import { Service } from "typedi";
 import { CreateUserInputModel, UserModel } from "../model/user.model";
 import { hash } from "bcryptjs";
+import { MapUserDataDto } from "../../data/util/user.map";
 
 
 @Service()
@@ -16,8 +17,14 @@ export class CreateUserUseCase {
       throw new Error('User already exist.');
     }
 
-    const passwordHash = await hash(password, 6);
+    const findUserByUsername = await this.userDataSource.findByUsername(username);
+    if(findUserByUsername) {
+      throw new Error('Username already exist.')
+    }
 
-    return this.userDataSource.save({ email, name, passwordHash, username });
+    const passwordHash = await hash(password, 6);
+    const createdUser = await this.userDataSource.save({ email, name, passwordHash, username })
+
+    return MapUserDataDto(createdUser);
   }
 }

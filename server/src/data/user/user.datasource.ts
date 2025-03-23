@@ -18,6 +18,10 @@ export class UserDataSource {
     return this.repository.findOne({ where: { email } });
   }
 
+  findByUsername(username: string): Promise<UserEntity | null> {
+    return this.repository.findOne({ where: { username } });
+  }
+
   save(input: CreateUserDataInput): Promise<UserEntity> {
     return this.repository.save(input);
   }
