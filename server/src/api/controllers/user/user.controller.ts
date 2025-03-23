@@ -2,7 +2,6 @@ import { Body, Controller, Get, Post } from "routing-controllers";
 import { AuthenticateUserInput, CreateUserInput } from "./user.input";
 import { AuthenticateUserUseCase, CreateUserUseCase } from "../../../domain/user";
 import { Service } from "typedi";
-import { AuthenticateUserModel, UserModel } from "@/domain/model";
 
 @Service()
 @Controller('/user')
