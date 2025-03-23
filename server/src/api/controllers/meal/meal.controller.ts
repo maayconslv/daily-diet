@@ -1,13 +1,21 @@
-import { Body, Controller, Post } from "routing-controllers";
+import { Request } from "express";
+import { RegisterMealUseCase } from "../../../domain/meal";
+import { AuthMiddleware } from "../../middleware/authenticate.middleware";
+import { Body, Controller, Post, Req, UseBefore } from "routing-controllers";
 import { Service } from "typedi";
+import { RegisterMealInput } from "./meal.input";
 
 @Service()
 @Controller('/meal')
 export class UserController {
-  constructor() {}
+  constructor(
+    private readonly registerMealUseCase: RegisterMealUseCase,
+  ) {}
 
   @Post()
-  async createUser(@Body() args: any) {
-    return { data: 'data' };
+  @UseBefore(AuthMiddleware)
+  async createUser(@Body() args: RegisterMealInput, @Req() req: Request) {
+    const response = await this.registerMealUseCase.exec({...args, userId: req.userId });
+    return { data: response };
   }
 }
