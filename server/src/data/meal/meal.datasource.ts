@@ -34,4 +34,8 @@ export class MealDataSource {
   update({ id, ...data }: UpdateMealDataInput): Promise<Meal>  {
     return prisma.meal.update({ data, where: { id } });
   }
+
+  findManyByUser(userId: number): Promise<Meal[]> {
+    return prisma.meal.findMany({ where: { userId } });
+  }
 }

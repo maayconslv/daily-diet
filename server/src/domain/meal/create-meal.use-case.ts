@@ -19,8 +19,7 @@ export class RegisterMealUseCase {
     }
 
     const meal = await this.mealDataSource.registerMeal({ ...data, userId: user.id });
-    const mealMap = mapMealDataDto(meal, user);
-
+    const mealMap = mapMealDataDto(meal);
     return mealMap;
   }
 }

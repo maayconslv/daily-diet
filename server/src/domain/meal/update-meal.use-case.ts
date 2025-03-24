@@ -27,7 +27,7 @@ export class UpdateMealUseCase {
     }
 
     const updatedMeal = await this.mealDataSource.update({ description, name, insideDiet, id: Number(data.mealId) });
-    const mapUpdatedMeal = mapMealDataDto(updatedMeal, user);
+    const mapUpdatedMeal = mapMealDataDto(updatedMeal);
 
     return mapUpdatedMeal;
   }

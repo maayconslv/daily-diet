@@ -5,7 +5,6 @@ export interface MealModel {
   name: string;
   description: string;
   insideDiet: boolean;
-  user: UserModel;
 }
 
 export interface RegisterMealInputModel {
