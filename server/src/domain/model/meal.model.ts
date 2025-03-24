@@ -14,3 +14,11 @@ export interface RegisterMealInputModel {
   insideDiet: boolean;
   userId: string;
 }
+
+export interface UpdateMealInputModel {
+  sessionId: string;
+  mealId: string;
+  name?: string;
+  description?: string;
+  insideDiet?: boolean;
+}
