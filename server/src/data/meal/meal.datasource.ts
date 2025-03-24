@@ -38,4 +38,8 @@ export class MealDataSource {
   findManyByUser(userId: number): Promise<Meal[]> {
     return prisma.meal.findMany({ where: { userId }, orderBy: { createdAt: 'asc' } });
   }
+
+  async delete(id: number): Promise<void> {
+    await prisma.meal.delete({ where: { id } });
+  }
 }
