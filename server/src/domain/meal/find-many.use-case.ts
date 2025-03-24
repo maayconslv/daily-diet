@@ -1,8 +1,8 @@
-import { MealDataSource } from "@/data/meal";
-import { UserDataSource } from "@/data/user/user.datasource";
+import { MealDataSource } from "../../data/meal";
+import { UserDataSource } from "../../data/user/user.datasource";
 import { Service } from "typedi";
 import { MealModel } from "../model";
-import { mapMealDataDto } from "@/data/util";
+import { mapMealDataDto } from "../../data/util";
 
 @Service()
 export class FindManyByUserUseCase {

@@ -1,7 +1,7 @@
 import { Request } from "express";
-import { RegisterMealUseCase, UpdateMealUseCase } from "../../../domain/meal";
+import { RegisterMealUseCase, UpdateMealUseCase, FindManyByUserUseCase } from "../../../domain/meal";
 import { AuthMiddleware } from "../../middleware/authenticate.middleware";
-import { Body, Controller, Post, Put, Req, UseBefore } from "routing-controllers";
+import { Body, Controller, Get, Post, Put, Req, UseBefore } from "routing-controllers";
 import { Service } from "typedi";
 import { RegisterMealInput, UpdateMealInput } from "./meal.input";
 
@@ -11,6 +11,7 @@ export class MealController {
   constructor(
     private readonly registerMealUseCase: RegisterMealUseCase,
     private readonly updateMealUseCase: UpdateMealUseCase,
+    private readonly findManyByUserUseCase: FindManyByUserUseCase
   ) {}
 
   @Post()
@@ -25,5 +26,12 @@ export class MealController {
   async update(@Body() args: UpdateMealInput, @Req() req: Request) {
     const response = await this.updateMealUseCase.exec({ ...args, userId: req.userId });
     return { data: response };
+  }
+
+  @Get()
+  @UseBefore(AuthMiddleware)
+  async findMany(@Req() req: Request) {
+    const response = await this.findManyByUserUseCase.exec(req.userId);
+    return { data: response }
   }
 }
