@@ -8,7 +8,6 @@ import { Service } from "typedi";
 export class AuthMiddleware implements ExpressMiddlewareInterface {
   use(req: Request, res: Response, next: NextFunction): any {
     const authHeader = req.headers.authorization;
-    console.log('auth header: ', authHeader);
 
     if (!authHeader) {
       return res.status(401).json({ message: "Token não fornecido!" });
@@ -19,7 +18,6 @@ export class AuthMiddleware implements ExpressMiddlewareInterface {
     try {
       const secret = Env.JWT_SECRET;
       const payload = jwt.verify(token, secret) as { sub: string };
-      console.log('payload: ', payload)
 
       req.userId = payload.sub;
       next();
