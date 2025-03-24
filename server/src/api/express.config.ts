@@ -2,7 +2,6 @@ import "reflect-metadata";
 import express from "express";
 import { useContainer, useExpressServer } from "routing-controllers";
 import path from "node:path";
-import { DBConnection } from "../data/db/database.config";
 import { Container } from 'typedi'
 
 export async function server() {
@@ -17,6 +16,5 @@ export async function server() {
   });
 
 
-  DBConnection.initialize().then(() => console.log('Database initialized.'));
   app.listen(3333, () => console.log(`Server is running on port 3333`));
 }

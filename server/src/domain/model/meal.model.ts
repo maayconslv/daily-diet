@@ -5,7 +5,7 @@ export interface MealModel {
   name: string;
   description: string;
   insideDiet: boolean;
-  session: UserModel;
+  user: UserModel;
 }
 
 export interface RegisterMealInputModel {
@@ -16,7 +16,7 @@ export interface RegisterMealInputModel {
 }
 
 export interface UpdateMealInputModel {
-  sessionId: string;
+  userId: string;
   mealId: string;
   name?: string;
   description?: string;

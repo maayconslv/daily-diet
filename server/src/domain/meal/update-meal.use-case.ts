@@ -12,8 +12,8 @@ export class UpdateMealUseCase {
   ) {}
 
   async exec({ name, description, insideDiet, ...data }: UpdateMealInputModel): Promise<MealModel> {
-    const meal = await this.mealDataSource.findById(data.mealId);
-    const user = await this.userDataSource.findById(data.sessionId);
+    const meal = await this.mealDataSource.findById(Number(data.mealId));
+    const user = await this.userDataSource.findById(Number(data.userId));
     if(!user) {
       throw new Error('User not found')
     }
@@ -22,13 +22,12 @@ export class UpdateMealUseCase {
       throw new Error('Meal not found error')
     }
 
-    if(meal.session.id !== data.sessionId) {
+    if(meal.userId !== Number(data.userId)) {
       throw new Error('Unauthorized error')
     }
 
-    const updatedMeal = await this.mealDataSource.update({ description, name, insideDiet, id: data.mealId });
+    const updatedMeal = await this.mealDataSource.update({ description, name, insideDiet, id: Number(data.mealId) });
     const mapUpdatedMeal = mapMealDataDto(updatedMeal, user);
-    console.log('result ', updatedMeal)
 
     return mapUpdatedMeal;
   }

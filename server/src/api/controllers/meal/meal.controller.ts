@@ -23,7 +23,7 @@ export class MealController {
   @Put()
   @UseBefore(AuthMiddleware)
   async update(@Body() args: any, @Req() req: Request) {
-    const response = await this.updateMealUseCase.exec({ ...args, sessionId: req.userId });
+    const response = await this.updateMealUseCase.exec({ ...args, userId: req.userId });
     return { data: response };
   }
 }

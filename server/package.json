@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npx tsc --outDir ./dist",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "migrate": "npm run typeorm migration:run -- -d ./src/data/db/database.config.ts",
+    "migrate": "npx prisma migrate dev --schema src/data/db/prisma/schema.prisma",
     "start:dev": "tsc-watch --onSuccess \"node -r ./tsconfig-paths-dist.js dist/api/index.js --inspect\" ",
     "start": "npm run build && node ./dist/index.js"
   },
@@ -26,11 +26,13 @@
     "eslint-plugin-prettier": "^5.2.3",
     "mocha": "^11.1.0",
     "prettier": "^3.5.3",
+    "prisma": "^6.5.0",
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@prisma/client": "^6.5.0",
     "axios": "^1.8.3",
     "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",

@@ -1,12 +1,17 @@
-import { MealModel, UserModel } from "@/domain/model";
-import { MealEntity } from "../db/entity";
+import { MealModel } from "@/domain/model";
+import { Meal, User } from "@prisma/client";
 
-export function mapMealDataDto(data: MealEntity, session: UserModel): MealModel {
+export function mapMealDataDto(data: Meal, session: User): MealModel {
   return {
+    id: String(data.id),
     name: data.name,
     description: data.description,
-    id: data.id,
     insideDiet: data.insideDiet,
-    session,
+    user: {
+      id: String(session.id),
+      email: session.email,
+      name: session.name,
+      username: session.username
+    },
   }
 }

@@ -1,7 +1,7 @@
 import { Service } from "typedi";
 import { Repository } from "typeorm";
-import { UserEntity } from "../db/entity";
-import { DBConnection } from "../db/database.config";
+import { prisma } from "../db/db.config";
+import { User } from "@prisma/client";
 
 interface CreateUserDataInput {
   name: string;
@@ -12,21 +12,19 @@ interface CreateUserDataInput {
 
 @Service()
 export class UserDataSource {
-  private readonly repository: Repository<UserEntity>  = DBConnection.getRepository(UserEntity);
-
-  findByEmail(email: string): Promise<UserEntity | null> {
-    return this.repository.findOne({ where: { email } });
+  findByEmail(email: string): Promise<User | null> {
+    return prisma.user.findUnique({ where: { email } });
   }
 
-  findByUsername(username: string): Promise<UserEntity | null> {
-    return this.repository.findOne({ where: { username } });
+  findByUsername(username: string): Promise<User | null> {
+    return prisma.user.findUnique({ where: { username } });
   }
 
-  save(input: CreateUserDataInput): Promise<UserEntity> {
-    return this.repository.save(input);
+  save(input: CreateUserDataInput): Promise<User> {
+    return prisma.user.create({ data: { ...input } });
   }
 
-  findById(id: string): Promise<UserEntity | null> {
-    return this.repository.findOneBy({ id });
+  findById(id: number): Promise<User | null> {
+    return prisma.user.findUnique({ where: { id } });
   }
 }

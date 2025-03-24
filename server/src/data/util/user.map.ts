@@ -1,10 +1,10 @@
 import { UserModel } from "@/domain/model/user.model";
-import { UserEntity } from "../db/entity";
+import { User } from "@prisma/client";
 
-export function mapUserDataDto({ email, id, name, username }: UserEntity): UserModel {
+export function mapUserDataDto({ email, id, name, username }: User): UserModel {
   return {
     email,
-    id,
+    id: String(id),
     name,
     username
   }

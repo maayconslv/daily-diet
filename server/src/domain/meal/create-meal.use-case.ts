@@ -13,14 +13,13 @@ export class RegisterMealUseCase {
   ) {}
 
   async exec(data: RegisterMealInputModel): Promise<MealModel> {
-    const user = await this.userDataSource.findById(data.userId);
+    const user = await this.userDataSource.findById(Number(data.userId));
     if(!user) {
       throw new Error('User not found error.');
     }
 
-    const meal = await this.mealDataSource.registerMeal({ ...data, sessionId: user.id });
-    const userMap = mapUserDataDto(user);
-    const mealMap = mapMealDataDto(meal, userMap);
+    const meal = await this.mealDataSource.registerMeal({ ...data, userId: user.id });
+    const mealMap = mapMealDataDto(meal, user);
 
     return mealMap;
   }
