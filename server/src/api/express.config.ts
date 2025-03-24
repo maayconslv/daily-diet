@@ -12,7 +12,7 @@ export async function server() {
   useContainer(Container);
   useExpressServer(app, {
     controllers: [path.join(__dirname,'controllers', '**', '*.controller.{ts,js}')],
-    // middlewares: [path.join(__dirname, 'middlewares', "**", "*.middleware.{ts,js}")],
+    middlewares: [path.join(__dirname, 'middlewares', "*.middleware.{ts,js}")],
     defaultErrorHandler: false,
   });
 
