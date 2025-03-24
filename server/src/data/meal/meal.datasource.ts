@@ -36,6 +36,6 @@ export class MealDataSource {
   }
 
   findManyByUser(userId: number): Promise<Meal[]> {
-    return prisma.meal.findMany({ where: { userId } });
+    return prisma.meal.findMany({ where: { userId }, orderBy: { createdAt: 'asc' } });
   }
 }

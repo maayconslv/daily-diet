@@ -1,19 +1,24 @@
-import { Body, Controller, Get, Post } from "routing-controllers";
+import { Body, Controller, Get, Post, Req, UseBefore } from "routing-controllers";
 import { AuthenticateUserInput, CreateUserInput } from "./user.input";
-import { AuthenticateUserUseCase, CreateUserUseCase } from "../../../domain/user";
+import { AuthenticateUserUseCase, CreateUserUseCase, GetUserMetricsUseCase } from "../../../domain/user";
 import { Service } from "typedi";
+import { Request } from "express";
+import { AuthMiddleware } from "../../middleware/authenticate.middleware";
 
 @Service()
 @Controller('/user')
 export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
-    private readonly authenticateUseCase: AuthenticateUserUseCase
+    private readonly authenticateUseCase: AuthenticateUserUseCase,
+    private readonly getUserMetricsUseCase: GetUserMetricsUseCase
   ) {}
 
-  @Get('/hello')
-  async hello() {
-    return { message: 'Hello world! '};
+  @Get('/metrics')
+  @UseBefore(AuthMiddleware)
+  async getMetrics(@Req() req: Request) {
+    const response = await this.getUserMetricsUseCase.exec(req.userId);
+    return { data: response };
   }
 
   @Post()

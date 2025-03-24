@@ -20,3 +20,10 @@ export interface AuthenticateUserInputModel {
 export interface AuthenticateUserModel extends UserModel {
   token: string
 }
+
+export interface UserMetricsModel {
+  totalMealsCount: number;
+  totalMealsInDiet: number;
+  totalMealsOutDiet: number;
+  maxCount: number;
+}
