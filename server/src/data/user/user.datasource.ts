@@ -27,6 +27,6 @@ export class UserDataSource {
   }
 
   findById(id: string): Promise<UserEntity | null> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOneBy({ id });
   }
 }

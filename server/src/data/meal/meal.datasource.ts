@@ -19,15 +19,14 @@ interface UpdateMealDataInput {
 
 @Service()
 export class MealDataSource {
-  private readonly repository: Repository<MealEntity> =
-    DBConnection.getRepository(MealEntity);
+  private readonly repository: Repository<MealEntity> = DBConnection.getRepository(MealEntity);
 
   async registerMeal(data: RegisterMealDataInput): Promise<MealEntity> {
-    return this.repository.save(data);
+    return this.repository.save({ session: { id: data.sessionId }, ...data });
   }
 
   async findById(id: string): Promise<MealEntity | null> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOne({ where: { id }, relations: ['session'] });
   }
 
   async update(data: UpdateMealDataInput): Promise<MealEntity> {

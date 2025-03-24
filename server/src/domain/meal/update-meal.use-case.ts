@@ -1,8 +1,8 @@
-import { MealDataSource } from "@/data/meal";
-import { UserDataSource } from "@/data/user/user.datasource";
+import { MealDataSource } from "../../data/meal";
+import { UserDataSource } from "../../data/user/user.datasource";
 import { Service } from "typedi";
 import { MealModel, UpdateMealInputModel } from "../model";
-import { mapMealDataDto } from "@/data/util";
+import { mapMealDataDto } from "../../data/util";
 
 @Service()
 export class UpdateMealUseCase {
@@ -28,6 +28,7 @@ export class UpdateMealUseCase {
 
     const updatedMeal = await this.mealDataSource.update({ description, name, insideDiet, id: data.mealId });
     const mapUpdatedMeal = mapMealDataDto(updatedMeal, user);
+    console.log('result ', updatedMeal)
 
     return mapUpdatedMeal;
   }
