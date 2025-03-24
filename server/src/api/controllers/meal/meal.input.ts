@@ -1,4 +1,4 @@
-import { IsBoolean, IsString } from "class-validator";
+import { IsBoolean, IsOptional, IsString } from "class-validator";
 
 export class RegisterMealInput {
   @IsString()
@@ -8,5 +8,22 @@ export class RegisterMealInput {
   description: string;
 
   @IsBoolean()
+  insideDiet: boolean;
+}
+
+export class UpdateMealInput {
+  @IsString()
+  mealId: string;
+
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  description: string;
+
+  @IsBoolean()
+  @IsOptional()
   insideDiet: boolean;
 }

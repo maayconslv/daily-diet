@@ -3,7 +3,7 @@ import { RegisterMealUseCase, UpdateMealUseCase } from "../../../domain/meal";
 import { AuthMiddleware } from "../../middleware/authenticate.middleware";
 import { Body, Controller, Post, Put, Req, UseBefore } from "routing-controllers";
 import { Service } from "typedi";
-import { RegisterMealInput } from "./meal.input";
+import { RegisterMealInput, UpdateMealInput } from "./meal.input";
 
 @Service()
 @Controller('/meal')
@@ -22,7 +22,7 @@ export class MealController {
 
   @Put()
   @UseBefore(AuthMiddleware)
-  async update(@Body() args: any, @Req() req: Request) {
+  async update(@Body() args: UpdateMealInput, @Req() req: Request) {
     const response = await this.updateMealUseCase.exec({ ...args, userId: req.userId });
     return { data: response };
   }
