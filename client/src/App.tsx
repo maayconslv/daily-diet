@@ -21,6 +21,39 @@ export function App() {
       <section className={styles.addMeal}>
         <h5>Refeições</h5>
         <Button>Nova refeição</Button>
+
+        <div className={styles.mealListContainer}>
+          <strong>12.08.22</strong>
+          <ul className={styles.mealListWrapper}>
+            <li>
+              <p>20:00</p>
+              <p>X-tudo</p>
+
+              <span></span>
+            </li>
+
+            <li>
+              <p>20:00</p>
+              <p>X-tudo</p>
+
+              <span></span>
+            </li>
+
+            <li>
+              <p>20:00</p>
+              <p>X-tudo</p>
+
+              <span></span>
+            </li>
+
+            <li>
+              <p>20:00</p>
+              <p>X-tudo</p>
+
+              <span></span>
+            </li>
+          </ul>
+        </div>
       </section>
     </main>
   )

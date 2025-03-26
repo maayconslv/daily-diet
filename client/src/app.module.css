@@ -19,3 +19,31 @@
   line-height: 130%;
   font-weight: normal;
 }
+
+.mealListContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.mealListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.mealListWrapper > li {
+  padding: 1.4rem 1.6rem;
+  color: var(--gray-1);
+  border: 1px solid var(--gray-5);
+  border-radius: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mealListWrapper > li span {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: var(--red-mid);
+}
