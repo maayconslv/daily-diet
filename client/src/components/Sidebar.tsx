@@ -1,7 +1,9 @@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from './ui/sidebar'
-import { ChevronDown, Home, Laptop, Moon, MoonStar, Sun } from 'lucide-react'
+import { ChevronDown, ChevronUp, Home, Laptop, LogOut, Moon, MoonStar, Sun } from 'lucide-react'
 
 export function SidebarApp() {
   return (
@@ -56,6 +58,42 @@ export function SidebarApp() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton className='p-2 h-12 cursor-pointer'>
+                  <div className='flex items-center gap-1'>
+                    <img src='https://github.com/maayconslv.png' alt='foto do github' className='h-8 w-8 rounded' />
+                    <div className='flex flex-col ml-2 text-xs'>
+                      <strong>mayconslv</strong>
+                      <span
+                        className='overflow-hidden whitespace-nowrap text-ellipsis text-muted-foreground'
+                        style={{
+                          maskImage: 'linear-gradient(to right, black 80%, transparent)',
+                          WebkitMaskImage: 'linear-gradient(to right, black 80%, transparent)',
+                        }}
+                      >
+                        mayconslv.contato@gmail.com
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronUp className='ml-auto' />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent side='top' className='w-[--radix-popper-anchor-width]'>
+                <DropdownMenuItem>
+                  <LogOut />
+                  <span>Sign out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   )
 }
