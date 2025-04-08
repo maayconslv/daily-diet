@@ -6,8 +6,8 @@ export function DefaultLayout() {
   return (
     <SidebarProvider>
       <SidebarApp />
-      <main>
-        <SidebarTrigger />
+      <main className='bg-stone-200 w-full p-4'>
+        {/* <SidebarTrigger /> */}
         <Outlet />
       </main>
     </SidebarProvider>
