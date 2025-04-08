@@ -1,4 +1,4 @@
-import { UtensilsCrossed } from 'lucide-react'
+export type DietStatsCardsColor = 'green' | 'blue' | 'red' | 'orange'
 
 interface DietStatsCardsProps {
   title: string
@@ -6,8 +6,6 @@ interface DietStatsCardsProps {
   icon: React.ReactNode
   color: DietStatsCardsColor
 }
-
-export type DietStatsCardsColor = 'green' | 'blue' | 'red' | 'orange'
 
 const colorVariants: Record<DietStatsCardsColor, string> = {
   green: 'bg-green-200 text-green-800',
@@ -19,7 +17,7 @@ const colorVariants: Record<DietStatsCardsColor, string> = {
 export function DietStatsCards({ icon, title, value, color }: DietStatsCardsProps) {
   return (
     <div className='p-3 flex items-center gap-3 bg-stone-50 rounded-md shadow-md w-full'>
-      <div className={`h-16 w-16 ${colorVariants[color]} rounded-md flex items-center justify-center`}>{icon}</div>
+      <div className={`h-[75px] w-[75px] ${colorVariants[color]} rounded-md flex items-center justify-center`}>{icon}</div>
 
       <div className='flex flex-col'>
         <span className='text-zinc-500'>{title}</span>
